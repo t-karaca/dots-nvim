@@ -20,6 +20,7 @@ return {
         dependencies = {
             "b0o/schemastore.nvim",
             "williamboman/mason.nvim",
+            "cenk1cenk2/schema-companion.nvim",
         },
         config = function()
             local schemastore = require("schemastore")
@@ -40,6 +41,19 @@ return {
                     },
                 },
             })
+
+            vim.lsp.config("yamlls", require("schema-companion").setup_client({
+                settings = {
+                    redhat = { telemetry = { enabled = false } },
+                    yaml = {
+                        schemaStore = {
+                            enable = false,
+                            url = "",
+                        },
+                        schemas = require("schemastore").yaml.schemas(),
+                    },
+                },
+            }))
 
             vim.lsp.enable({
                 "buf_ls",
