@@ -4,8 +4,6 @@ local lombok_jar = vim.fn.expand("$MASON/share/jdtls/lombok.jar")
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = vim.fn.expand("$HOME/.jdtls/") .. project_name
 
-local on_attach = require("usr.core.lspkeymaps").on_attach
-
 local bundles = vim.fn.glob("$MASON/share/java-debug-adapter/com.microsoft.java.debug.plugin-*.jar", false, true)
 
 vim.list_extend(bundles, vim.fn.glob("$MASON/share/java-test/*.jar", false, true))
@@ -18,7 +16,6 @@ local config = {
     root_dir = vim.fs.dirname(
         vim.fs.find({ "gradlew", ".git", "mvnw", "settings.gradle", "pom.xml" }, { upward = true })[1]
     ),
-    on_attach = on_attach,
     init_options = {
         bundles = bundles,
         extendedClientCapabilities = jdtls.extendedClientCapabilities,
