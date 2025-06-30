@@ -29,7 +29,5 @@ end, {
 })
 
 vim.keymap.set("n", "gK", function()
-    local new_config = not vim.diagnostic.config().virtual_lines
-    local text = not vim.diagnostic.config().virtual_text
-    vim.diagnostic.config({ virtual_lines = new_config, virtual_text = text })
-end, { desc = "Toggle diagnostics virtual lines" })
+    vim.diagnostic.open_float({ border = "single" })
+end)
