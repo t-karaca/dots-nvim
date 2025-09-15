@@ -8,14 +8,6 @@ return {
         { "<C-n>", "<cmd>NvimTreeToggle<CR>", desc = "Toggle NvimTree" },
     },
     config = function()
-        local function pickWin()
-            return Snacks.picker.util.pick_win({
-                filter = function(win, buf)
-                    return not vim.bo[buf].filetype:find("^NvimTree")
-                end,
-            })
-        end
-
         local nvimtree = require("nvim-tree")
 
         vim.g.loaded_netrw = 1
@@ -64,7 +56,11 @@ return {
             actions = {
                 open_file = {
                     window_picker = {
-                        picker = pickWin,
+                        picker = function()
+                            return Snacks.picker.util.pick_win({
+                                filter = require("usr.utils").windowFilter,
+                            })
+                        end,
                     },
                 },
             },
