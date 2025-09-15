@@ -9,7 +9,8 @@ local bundles = vim.fn.glob("$MASON/share/java-debug-adapter/com.microsoft.java.
 vim.list_extend(bundles, vim.fn.glob("$MASON/share/java-test/*.jar", false, true))
 vim.list_extend(bundles, require("spring_boot").java_extensions())
 
-vim.keymap.set("n", "<leader>rj", jdtls.pick_test, { desc = "Pick java test to run" })
+vim.keymap.set("n", "<leader>rj", jdtls.pick_test, { desc = "Pick java test to debug" })
+vim.keymap.set("n", "<leader>rt", jdtls.test_nearest_method, { desc = "Debug java test under cursor" })
 
 ---@type vim.lsp.ClientConfig
 local config = {
