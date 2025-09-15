@@ -1,3 +1,5 @@
+---@module "lazy"
+---@type LazyPluginSpec
 return {
     "lervag/vimtex",
     enabled = function() return vim.fn.executable("tex") == 1 end,

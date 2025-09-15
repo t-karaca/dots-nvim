@@ -1,3 +1,5 @@
+---@module "lazy"
+---@type LazyPluginSpec
 return {
     "nvim-tree/nvim-tree.lua",
     dependencies = {

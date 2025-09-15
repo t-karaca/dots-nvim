@@ -1,3 +1,5 @@
+---@module "lazy"
+---@type LazyPluginSpec[]
 return {
     {
         "towolf/vim-helm",

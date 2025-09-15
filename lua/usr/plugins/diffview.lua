@@ -1,3 +1,5 @@
+---@module "lazy"
+---@type LazyPluginSpec
 return {
     "sindrets/diffview.nvim",
     lazy = true,
@@ -22,15 +24,7 @@ return {
             desc = "Close diffview",
         },
     },
-    config = function()
-        local diffview = require("diffview")
-
-        diffview.setup({
-            hooks = {
-                diff_buf_win_enter = function(bufnr)
-                    -- vim.opt_local.foldlevel = 1
-                end,
-            },
-        })
-    end,
+    ---@module "diffview"
+    ---@type DiffviewConfig
+    opts = {},
 }

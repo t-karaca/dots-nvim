@@ -1,3 +1,5 @@
+---@module "lazy"
+---@type LazyPluginSpec[]
 return {
     {
         "mfussenegger/nvim-dap",
@@ -227,11 +229,10 @@ return {
     {
         "theHamsta/nvim-dap-virtual-text",
         lazy = true,
-        enabled = true,
         event = { "VeryLazy" },
-        config = function()
-            require("nvim-dap-virtual-text").setup({})
-        end,
+        ---@module "nvim-dap-virtual-text"
+        ---@type nvim_dap_virtual_text_options
+        opts = {},
     },
     {
         "leoluz/nvim-dap-go",
@@ -251,7 +252,6 @@ return {
         dependencies = { "mfussenegger/nvim-dap" },
         lazy = true,
         ft = { "c", "cpp", "rust", "zig" },
-        opts = {},
         config = function()
             require("dap-lldb").setup({})
         end,
