@@ -33,6 +33,11 @@ return {
             vim.keymap.set("n", "<F6>", function()
                 dap.continue({ new = false })
             end, { desc = "Continue execution" })
+
+            vim.keymap.set("n", "<F5>", function()
+                dap.step_into({ askForTargets = true, steppingGranularity = "instruction" })
+            end, { desc = "Step into with prompt" })
+
             vim.keymap.set("n", "<F7>", dap.step_into, { desc = "Step into" })
             vim.keymap.set("n", "<F8>", dap.step_over, { desc = "Step over" })
             vim.keymap.set("n", "<F9>", dap.step_out, { desc = "Step out" })
