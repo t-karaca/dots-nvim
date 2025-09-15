@@ -21,13 +21,10 @@ vim.keymap.set("n", "<leader>fx", "<cmd>!chmod +x %<CR>", { desc = "Make current
 
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Smart rename" })
+vim.keymap.set("n", "gK", vim.diagnostic.open_float, { desc = "Show diagnostics for current line" })
 
 vim.keymap.set("n", "K", function()
-    vim.lsp.buf.hover({ border = "single" })
+    vim.lsp.buf.hover({ border = "solid" })
 end, {
     desc = "Show documentation for what is under cursor"
 })
-
-vim.keymap.set("n", "gK", function()
-    vim.diagnostic.open_float({ border = "single" })
-end)

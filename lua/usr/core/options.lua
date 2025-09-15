@@ -56,8 +56,6 @@ vim.opt.background = "dark"
 
 vim.g.sass_recommended_style = false
 
-vim.diagnostic.config({ virtual_text = true })
-
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
@@ -67,8 +65,23 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     pattern = "*",
 })
 
-local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
+vim.diagnostic.config({
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN] = "",
+            [vim.diagnostic.severity.HINT] = "󰠠",
+            [vim.diagnostic.severity.INFO] = "",
+        },
+        numhl = {
+            [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+            [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+            [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+            [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+        },
+    },
+    virtual_text = true,
+    float = {
+        border = "solid",
+    },
+})
