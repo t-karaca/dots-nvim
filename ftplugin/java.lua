@@ -26,6 +26,22 @@ local config = {
     },
     settings = {
         java = {
+            completion = {
+                favoriteStaticMembers = {
+                    "org.junit.Assert.*",
+                    "org.junit.Assume.*",
+                    "org.junit.jupiter.api.Assertions.*",
+                    "org.junit.jupiter.api.Assumptions.*",
+                    "org.junit.jupiter.api.DynamicContainer.*",
+                    "org.junit.jupiter.api.DynamicTest.*",
+                    "org.assertj.core.api.Assertions.*",
+                    "org.mockito.Mockito.*",
+                    "org.mockito.ArgumentMatchers.*",
+                    "com.github.tomakehurst.wiremock.client.WireMock.*",
+                    "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*",
+                    "org.springframework.test.web.servlet.result.MockMvcResultMatchers.*",
+                },
+            },
             eclipse = {
                 downloadSources = true,
             },
