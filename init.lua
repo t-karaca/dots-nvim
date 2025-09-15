@@ -28,4 +28,12 @@ require("lazy").setup({
     change_detection = {
         notify = false,
     },
+    ui = {
+        custom_keys = {
+            ["<C-h>"] = { function() end },
+            ["<C-j>"] = { function() end },
+            ["<C-k>"] = { function() end },
+            ["<C-l>"] = { function() end },
+        }
+    },
 })
