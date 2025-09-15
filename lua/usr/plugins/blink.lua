@@ -6,6 +6,9 @@ return {
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
+        fuzzy = {
+            implementation = "lua",
+        },
         appearance = {
             nerd_font_variant = "mono",
         },
@@ -31,6 +34,7 @@ return {
             ["<C-j>"] = { "select_next", "fallback" },
             ["<Up>"] = { "select_prev", "fallback" },
             ["<Down>"] = { "select_next", "fallback" },
+            ["<C-p>"] = { "show_signature", "hide_signature", "fallback" },
             ["<C-d>"] = { "scroll_documentation_down", "fallback" },
             ["<C-u>"] = { "scroll_documentation_up", "fallback" },
         },
