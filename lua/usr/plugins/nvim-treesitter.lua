@@ -9,9 +9,13 @@ return {
             local parsers = require("nvim-treesitter.parsers")
 
             vim.filetype.add({
-                pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+                pattern = {
+                    [".*/hypr/.*%.conf"] = "hyprlang"
+                },
+                filename = {
+                    ["spring.factories"] = "jproperties",
+                },
             })
-
 
             vim.api.nvim_create_autocmd("User", {
                 pattern = "TSUpdate",
