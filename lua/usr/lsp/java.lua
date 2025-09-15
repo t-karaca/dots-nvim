@@ -1,6 +1,18 @@
 return {
     { "mfussenegger/nvim-jdtls" },
     {
+        "JavaHello/spring-boot.nvim",
+        lazy = true,
+        dependencies = {
+            "mfussenegger/nvim-jdtls",
+        },
+        config = function()
+            require("spring_boot").setup({
+                java_cmd = vim.fn.expand("$HOME/.local/share/mise/installs/java/corretto-21/bin/java"),
+            })
+        end,
+    },
+    {
         "iamkarasik/sonarqube.nvim",
         dependencies = {
             "williamboman/mason.nvim",
@@ -15,53 +27,29 @@ return {
                         vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarjava.jar"),
                         vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarjavasymbolicexecution.jar"),
                     },
+                    cmd_env = {
+                        JAVA_HOME = vim.fn.expand("$HOME/.local/share/mise/installs/java/corretto-21/"),
+                    },
                 },
                 rules = { enabled = true },
-                csharp = {
-                    enabled = false,
+                java = {
+                    enabled = true,
+                    await_jdtls = true,
                 },
-                go = {
-                    enabled = false,
-                },
-                html = {
-                    enabled = false,
-                },
+                csharp = { enabled = false },
+                go = { enabled = false },
+                html = { enabled = false },
+                javascript = { enabled = false },
+                php = { enabled = false },
+                python = { enabled = false },
+                text = { enabled = false },
+                xml = { enabled = false },
                 iac = {
                     -- Docker analysis only works on 'Dockerfile'
                     -- All supported files: https://github.com/SonarSource/sonar-iac
                     enabled = false,
                 },
-                java = {
-                    enabled = true,
-                    await_jdtls = true,
-                },
-                javascript = {
-                    enabled = false,
-                    clientNodePath = vim.fn.exepath("node"),
-                },
-                php = {
-                    enabled = false,
-                },
-                python = {
-                    enabled = false,
-                },
-                text = {
-                    enabled = false,
-                },
-                xml = {
-                    enabled = false,
-                },
             })
         end,
     },
-    {
-        "JavaHello/spring-boot.nvim",
-        lazy = true,
-        dependencies = {
-            "mfussenegger/nvim-jdtls",
-        },
-        config = function()
-            require("spring_boot").setup({})
-        end,
-    }
 }

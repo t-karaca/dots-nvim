@@ -11,8 +11,12 @@ vim.list_extend(bundles, require("spring_boot").java_extensions())
 
 vim.keymap.set("n", "<leader>rj", jdtls.pick_test, { desc = "Pick java test to run" })
 
+---@type vim.lsp.ClientConfig
 local config = {
     cmd = { "jdtls", "--jvm-arg=-javaagent:" .. lombok_jar, "-data", workspace_dir },
+    cmd_env = {
+        JAVA_HOME = vim.fn.expand("$HOME/.local/share/mise/installs/java/corretto-21/"),
+    },
     root_dir = vim.fs.dirname(
         vim.fs.find({ "gradlew", ".git", "mvnw", "settings.gradle", "pom.xml" }, { upward = true })[1]
     ),
@@ -42,6 +46,22 @@ local config = {
             },
             settings = {
                 url = vim.fn.stdpath("config") .. "/jdtls.properties",
+            },
+            configuration = {
+                runtimes = {
+                    {
+                        name = "JavaSE-21",
+                        path = vim.fn.expand("$HOME/.local/share/mise/installs/java/corretto-21/"),
+                    },
+                    {
+                        name = "JavaSE-17",
+                        path = vim.fn.expand("$HOME/.local/share/mise/installs/java/corretto-17/"),
+                    },
+                    {
+                        name = "JavaSE-1.8",
+                        path = vim.fn.expand("$HOME/.local/share/mise/installs/java/corretto-8/"),
+                    },
+                },
             },
         },
     },
