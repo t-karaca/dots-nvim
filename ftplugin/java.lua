@@ -61,6 +61,12 @@ local config = {
             contentProvider = {
                 preferred = "fernflower",
             },
+            diagnostic = {
+                filter = {
+                    "**/target/generated-sources/**/*.java",
+                    "**/build/generated/**/*.java",
+                },
+            },
             settings = {
                 url = vim.fn.stdpath("config") .. "/jdtls.properties",
             },

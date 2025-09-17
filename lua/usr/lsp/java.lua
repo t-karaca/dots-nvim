@@ -33,7 +33,10 @@ return {
                         JAVA_HOME = vim.fn.expand("$HOME/.local/share/mise/installs/java/corretto-21/"),
                     },
                 },
-                rules = { enabled = true },
+                rules = {
+                    enabled = true,
+                    ["java:S1135"] = { enabled = false }, -- Track uses of "TODO" tags
+                },
                 java = {
                     enabled = true,
                     await_jdtls = true,
