@@ -27,7 +27,13 @@ vim.opt.softtabstop = 4
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
-vim.opt.fillchars = { eob = " " }
+vim.opt.fillchars = {
+    eob = " ",
+    diff = " ",
+    fold = " ",
+    foldclose = "",
+    foldopen = "",
+}
 
 local space = "·"
 vim.opt.listchars:append {
