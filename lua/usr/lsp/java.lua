@@ -16,6 +16,8 @@ return {
     },
     {
         "iamkarasik/sonarqube.nvim",
+        lazy = true,
+        ft = { "java" },
         dependencies = {
             "williamboman/mason.nvim",
         },

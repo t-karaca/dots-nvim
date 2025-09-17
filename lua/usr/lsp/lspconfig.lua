@@ -7,6 +7,8 @@ return {
     },
     {
         "williamboman/mason.nvim",
+        lazy = true,
+        cmd = { "Mason", "MasonLog", "MasonInstall" },
         ---@module "mason"
         ---@type MasonSettings
         opts = {

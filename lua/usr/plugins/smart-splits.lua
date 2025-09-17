@@ -2,6 +2,7 @@
 ---@type LazyPluginSpec
 return {
     "mrjones2014/smart-splits.nvim",
+    lazy = true,
     ---@module "smart-splits"
     ---@type SmartSplitsConfig
     ---@diagnostic disable-next-line: missing-fields
@@ -9,17 +10,14 @@ return {
         default_amount = 10,
         at_edge = "stop",
     },
-    init = function()
-        local smart_splits = require("smart-splits")
-
-        vim.keymap.set("n", "<A-h>", smart_splits.resize_left)
-        vim.keymap.set("n", "<A-j>", smart_splits.resize_down)
-        vim.keymap.set("n", "<A-k>", smart_splits.resize_up)
-        vim.keymap.set("n", "<A-l>", smart_splits.resize_right)
-
-        vim.keymap.set("n", "<C-h>", smart_splits.move_cursor_left)
-        vim.keymap.set("n", "<C-j>", smart_splits.move_cursor_down)
-        vim.keymap.set("n", "<C-k>", smart_splits.move_cursor_up)
-        vim.keymap.set("n", "<C-l>", smart_splits.move_cursor_right)
-    end,
+    keys = {
+        { "<A-h>", function() require("smart-splits").resize_left() end,       desc = "Resize left" },
+        { "<A-j>", function() require("smart-splits").resize_down() end,       desc = "Resize down" },
+        { "<A-k>", function() require("smart-splits").resize_up() end,         desc = "Resize up" },
+        { "<A-l>", function() require("smart-splits").resize_right() end,      desc = "Resize right" },
+        { "<C-h>", function() require("smart-splits").move_cursor_left() end,  desc = "Navigate left" },
+        { "<C-j>", function() require("smart-splits").move_cursor_down() end,  desc = "Navigate down" },
+        { "<C-k>", function() require("smart-splits").move_cursor_up() end,    desc = "Navigate up" },
+        { "<C-l>", function() require("smart-splits").move_cursor_right() end, desc = "Navigate right" },
+    }
 }
