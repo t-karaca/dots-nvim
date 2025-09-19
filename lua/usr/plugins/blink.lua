@@ -77,8 +77,8 @@ return {
                 draw = {
                     padding = 1,
                     columns = {
-                        { "label",     gap = 1 },
-                        { "kind_icon", "kind", gap = 1 },
+                        { "kind_icon", "label", gap = 1 },
+                        { "kind" },
                     },
                 },
             },
@@ -101,6 +101,11 @@ return {
             completion = {
                 menu = {
                     auto_show = true,
+                    draw = {
+                        columns = {
+                            { "kind_icon", "label", gap = 1 },
+                        },
+                    },
                 },
                 list = {
                     selection = {

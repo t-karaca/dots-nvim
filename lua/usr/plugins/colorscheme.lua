@@ -46,6 +46,7 @@ return {
                     DapUIWinBar = { bg = C.mantle },
                     ["@variable.member"] = { fg = C.lavender },
                     ["@variable.parameter.bash"] = { fg = C.maroon },
+                    ["@lsp.type.interface"] = { fg = C.flamingo },
                     ["@property"] = { fg = C.lavender, style = O.styles.properties or {} },
                     ["@tag"] = { fg = C.mauve },
                     ["@tag.attribute"] = { fg = C.teal, style = O.styles.miscs or { "italic" } },

@@ -161,16 +161,27 @@ return {
         vim.api.nvim_create_autocmd("User", {
             pattern = "VeryLazy",
             callback = function()
-                Snacks.toggle.diagnostics():map("<leader>td")
-                Snacks.toggle.inlay_hints():map("<leader>ti")
+                local function with_toggle(icon)
+                    return {
+                        enabled = "  " .. icon,
+                        disabled = "  " .. icon,
+                    }
+                end
 
-                Snacks.toggle.option("relativenumber", { name = "Relative Numbers" }):map("<leader>tr")
-                Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>tw")
-                Snacks.toggle.option("list", { name = "List (Visible Whitespaces)" }):map("<leader>ts")
+                Snacks.toggle.diagnostics({ name = "Diagnostics", icon = with_toggle("") }):map("<leader>td")
+                Snacks.toggle.inlay_hints({ icon = with_toggle("") }):map("<leader>ti")
+
+                Snacks.toggle.option("number", { name = "Line Numbers", icon = with_toggle("") }):map("<leader>tn")
+                Snacks.toggle.option("relativenumber", { name = "Relative Numbers", icon = with_toggle("") }):map(
+                    "<leader>tr")
+                Snacks.toggle.option("wrap", { name = "Wrap", icon = with_toggle("󱁐") }):map("<leader>tw")
+                Snacks.toggle.option("list", { name = "List (Visible Whitespaces)", icon = with_toggle("󱁐") }):map(
+                    "<leader>ts")
 
                 Snacks.toggle.new({
                     id = "git_blame",
                     name = "Git Blame",
+                    icon = with_toggle(""),
                     get = function()
                         return require("gitsigns.config").config.current_line_blame
                     end,
@@ -182,6 +193,7 @@ return {
                 Snacks.toggle.new({
                     id = "git_signs",
                     name = "Git Signs",
+                    icon = with_toggle(""),
                     get = function()
                         return require("gitsigns.config").config.signcolumn
                     end,
@@ -193,6 +205,7 @@ return {
                 Snacks.toggle.new({
                     id = "format_on_save",
                     name = "Format On Save",
+                    icon = with_toggle("󰊄"),
                     get = function()
                         return not vim.g.disable_autoformat
                     end,
@@ -204,6 +217,7 @@ return {
                 Snacks.toggle.new({
                     id = "format_on_save_buffer",
                     name = "Format On Save (Buffer)",
+                    icon = with_toggle("󰊄"),
                     get = function()
                         return not vim.b.disable_autoformat
                     end,
