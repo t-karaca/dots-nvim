@@ -22,8 +22,18 @@ return {
         },
         sources = {
             default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+            per_filetype = {
+                ["dap-repl"] = { "dap" },
+                ["query"] = { "omni" },
+            },
             providers = {
                 lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", score_offset = 100 },
+                dap = { name = "dap", module = "usr.dap-source", score_offset = 200 },
+                snippets = {
+                    should_show_items = function(ctx)
+                        return ctx.trigger.initial_kind ~= 'trigger_character'
+                    end,
+                },
             },
         },
         keymap = {
