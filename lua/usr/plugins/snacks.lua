@@ -44,8 +44,11 @@ return {
                     bg = "#1e1e2e",
                     blend = 0,
                     transparent = false
-                }
-            }
+                },
+            },
+            on_open = function(win)
+                vim.w[win.win].is_snacks_zen = true
+            end
         },
         picker = {
             ui_select = true,
@@ -58,8 +61,23 @@ return {
             },
             actions = {
                 pick_or_confirm = function(picker, item)
+                    if vim.w[picker.main].is_snacks_zen then
+                        picker:action("confirm")
+                        return
+                    end
+
                     if not item then
                         return
+                    end
+
+                    if item.file then
+                        local mainBuf = vim.api.nvim_win_get_buf(picker.main)
+                        local file = vim.api.nvim_buf_get_name(mainBuf)
+
+                        if vim.endswith(file, item.file) then
+                            picker:action("confirm")
+                            return
+                        end
                     end
 
                     if not item.file or picker.opts.layout.preview == "main" or picker.opts.confirm then
@@ -102,6 +120,14 @@ return {
                 list = {
                     keys = {
                         ["<CR>"] = { "pick_or_confirm", mode = { "n", "i" } },
+                    },
+                },
+                preview = {
+                    wo = {
+                        number = false,
+                        relativenumber = false,
+                        signcolumn = "no",
+                        foldcolumn = "0",
                     },
                 },
             },
