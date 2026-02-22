@@ -8,6 +8,17 @@ return {
     opts = {
         options = {
             globalstatus = true,
+            always_show_tabline = false,
+        },
+        tabline = {
+            lualine_a = {
+                {
+                    "tabs",
+                    mode = 1,
+                    path = 0,
+                    show_modified_status = false,
+                }
+            }
         },
         sections = {
             lualine_a = { "mode" },
@@ -61,5 +72,13 @@ return {
             "lazy",
             "quickfix",
         },
-    }
+    },
+    init = function()
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = "checkhealth",
+            callback = function()
+                vim.api.nvim_tabpage_set_var(0, "tabname", "Checkhealth")
+            end
+        })
+    end,
 }

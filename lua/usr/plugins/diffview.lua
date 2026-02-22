@@ -26,5 +26,12 @@ return {
     },
     ---@module "diffview"
     ---@type DiffviewConfig
-    opts = {},
+    opts = {
+        hooks = {
+            ---@param view View
+            view_opened = function(view)
+                vim.t[view.tabpage].tabname = view.class:name()
+            end
+        }
+    },
 }
