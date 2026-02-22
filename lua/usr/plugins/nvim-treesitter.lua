@@ -39,7 +39,6 @@ return {
                 "promql",
                 "printf",
                 "javadoc",
-                "comment",
                 "regex",
                 "re2c",
                 "doxygen",
@@ -51,6 +50,9 @@ return {
                 "diff",
                 "git_rebase",
                 "disassembly",
+                "query",
+                "luap",
+                "readline",
             })
 
             vim.api.nvim_create_autocmd("FileType", {
@@ -79,6 +81,14 @@ return {
                         vim.treesitter.start(buf)
 
                         vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                        -- vim.wo.statuscolumn =
+                        -- '%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? "" : "") : " " }%s%l '
+                        --
+                        -- vim.wo.foldcolumn = "auto"
+                        -- vim.wo.foldtext = ""
+                        -- vim.wo.foldlevel = 99
+                        -- vim.wo.foldmethod = "expr"
+                        -- vim.wo.foldexpr = "v:lua.vim.lsp.foldexpr()"
                     end)
                 end
             })
@@ -122,6 +132,7 @@ return {
             },
             {
                 "ic",
+                ---@type TSNode
                 function()
                     require("nvim-treesitter-textobjects.select").select_textobject("@call.inner", "textobjects")
                 end,
@@ -168,7 +179,7 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         config = function()
             require("treesitter-context").setup({
-                enable = true,
+                enable = false,
                 multiwindow = false,
                 max_lines = 0,            -- How many lines the window should span. Values <= 0 mean no limit.
                 min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.

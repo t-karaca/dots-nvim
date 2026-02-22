@@ -38,7 +38,7 @@ return {
         },
         keymap = {
             preset = "none",
-            ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+            ["<C-space>"] = { "hide", "show", "show_documentation", "hide_documentation" },
             ["<Tab>"] = { "accept", "fallback" },
             ["<S-Tab>"] = { "snippet_backward", "fallback" },
             ["<C-e>"] = { "snippet_forward", "fallback" },

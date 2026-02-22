@@ -45,7 +45,7 @@ return {
             local schemastore = require("schemastore")
 
             vim.lsp.config("clangd", {
-                cmd = { "clangd", "--clang-tidy" }
+                cmd = { "clangd", "--clang-tidy", "--completion-style=detailed" }
             })
 
             vim.lsp.config("angularls", {
@@ -87,19 +87,10 @@ return {
                 })
             )
 
-            -- local mappedSchemas = vim.tbl_map(function(schema)
-            --     return {
-            --         uri = schema.url,
-            --         name = schema.name,
-            --         description = schema.description,
-            --     }
-            -- end, jsonSchemas)
-
             vim.lsp.config("yamlls", schemaCompanion.setup_client(
                 schemaCompanion.adapters.yamlls.setup({
                     sources = {
                         schemaCompanion.sources.matchers.kubernetes.setup({ version = "master" }),
-                        -- schemaCompanion.sources.schemas.setup(mappedSchemas),
                         schemaCompanion.sources.lsp.setup(),
                     },
                 }),
@@ -107,42 +98,48 @@ return {
                 {
                     settings = {
                         redhat = { telemetry = { enabled = false } },
-                        yaml = {
-                            -- schemaStore = {
-                            --     enable = false,
-                            --     url = "",
-                            -- },
-                            -- schemas = schemastore.yaml.schemas(),
-                        },
                     }
                 })
             )
 
+            local lspconfig = {
+                ["angularls"] = vim.fn.executable("ngserver") == 1,
+                ["bashls"] = vim.fn.executable("bash-language-server") == 1,
+                ["buf_ls"] = vim.fn.executable("buf") == 1,
+                ["dockerls"] = vim.fn.executable("docker-langserver") == 1,
+                ["clangd"] = vim.fn.executable("clangd") == 1,
+                ["cssls"] = vim.fn.executable("vscode-css-language-server") == 1,
+                ["emmylua_ls"] = vim.fn.executable("emmylua_ls") == 1,
+                ["glsl_analyzer"] = vim.fn.executable("glsl_analyzer") == 1,
+                ["gopls"] = vim.fn.executable("gopls") == 1,
+                ["gradle_ls"] = vim.fn.executable("gradle-language-server") == 1,
+                ["helm_ls"] = vim.fn.executable("helm_ls") == 1,
+                ["html"] = vim.fn.executable("vscode-html-language-server") == 1,
+                ["hyprls"] = vim.fn.executable("hyprls") == 1,
+                ["jsonls"] = vim.fn.executable("vscode-json-language-server") == 1,
+                ["lemminx"] = vim.fn.executable("lemminx") == 1,
+                -- ["lua_ls"] = vim.fn.executable("lua-language-server") == 1,
+                ["mesonlsp"] = vim.fn.executable("mesonlsp") == 1,
+                ["neocmake"] = vim.fn.executable("neocmakelsp") == 1,
+                ["qmlls"] = vim.fn.executable("qmlls") == 1,
+                ["rust_analyzer"] = vim.fn.executable("rust-analyzer") == 1,
+                ["somesass_ls"] = vim.fn.executable("some-sass-language-server") == 1,
+                ["tailwindcss"] = vim.fn.executable("tailwindcss-language-server") == 1,
+                ["ts_ls"] = vim.fn.executable("typescript-language-server") == 1,
+                ["yamlls"] = vim.fn.executable("yaml-language-server") == 1,
+                ["zls"] = vim.fn.executable("zls") == 1,
+            }
 
-            vim.lsp.enable({
-                "buf_ls",
-                "neocmake",
-                "mesonlsp",
-                "clangd",
-                "lemminx",
-                "gopls",
-                "bashls",
-                "gradle_ls",
-                "dockerls",
-                "zls",
-                "rust_analyzer",
-                "glsl_analyzer",
-                "helm_ls",
-                "jsonls",
-                "yamlls",
-                "html",
-                "ts_ls",
-                "cssls",
-                "somesass_ls",
-                "tailwindcss",
-                "lua_ls",
-                "angularls",
-            })
+            ---@type string[]
+            local enabledServers = {}
+
+            for lspName, enabled in pairs(lspconfig) do
+                if enabled then
+                    table.insert(enabledServers, lspName)
+                end
+            end
+
+            vim.lsp.enable(enabledServers)
         end
     }
 }

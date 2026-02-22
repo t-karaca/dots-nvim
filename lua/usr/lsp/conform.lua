@@ -51,23 +51,16 @@ return {
                     inherit = true,
                     prepend_args = { "-i", "4" },
                 },
-                ["palantir-java-format"] = {
-                    command = "palantir-java-format",
-                    args = {
-                        "--palantir",
-                        "-",
-                    },
-                },
             },
         })
 
-        vim.keymap.set({ "n", "v" }, "<leader>mp", function()
+        vim.keymap.set({ "n", "v" }, "<leader>cf", function()
             conform.format({
                 lsp_fallback = true,
                 async = false,
                 timeout_ms = 1000,
             })
-        end, { desc = "Format file or range (in visual mode)" })
+        end, { desc = "Code format" })
 
         vim.api.nvim_create_user_command("FormatDisable", function(args)
             if args.bang then

@@ -16,6 +16,7 @@ return {
         dashboard = { enabled = true },
         bigfile = { enabled = true },
         words = { enabled = true },
+        image = {},
         notifier = {
             enabled = true,
             top_down = false,
@@ -122,14 +123,14 @@ return {
                         ["<CR>"] = { "pick_or_confirm", mode = { "n", "i" } },
                     },
                 },
-                preview = {
-                    wo = {
-                        number = false,
-                        relativenumber = false,
-                        signcolumn = "no",
-                        foldcolumn = "0",
-                    },
-                },
+                -- preview = {
+                --     wo = {
+                --         number = false,
+                --         relativenumber = false,
+                --         signcolumn = "no",
+                --         foldcolumn = "0",
+                --     },
+                -- },
             },
         },
     },
@@ -137,6 +138,7 @@ return {
         { "<leader>bd", function() Snacks.bufdelete() end,                                                                  desc = "Delete Buffer", },
         { "<leader>ff", function() Snacks.picker.files() end,                                                               desc = "Find Files", },
         { "<leader>fg", function() Snacks.picker.grep() end,                                                                desc = "Grep", },
+        { "<leader>fw", function() Snacks.picker.grep_word() end,                                                           desc = "Grep word under cursor", },
         { "<leader>fb", function() Snacks.picker.buffers({ nofile = true }) end,                                            desc = "Buffers", },
         { "<leader>fa", function() Snacks.picker.git_files() end,                                                           desc = "Git Files", },
         { "<leader>fr", function() Snacks.picker.resume() end,                                                              desc = "Resume picker", },
@@ -177,6 +179,8 @@ return {
                 Snacks.toggle.option("wrap", { name = "Wrap", icon = with_toggle("󱁐") }):map("<leader>tw")
                 Snacks.toggle.option("list", { name = "List (Visible Whitespaces)", icon = with_toggle("󱁐") }):map(
                     "<leader>ts")
+
+                Snacks.toggle.indent():map("<leader>tl")
 
                 Snacks.toggle.new({
                     id = "git_blame",
