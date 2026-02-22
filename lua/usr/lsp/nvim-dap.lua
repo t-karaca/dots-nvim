@@ -247,9 +247,13 @@ return {
         config = function()
             local dapgo = require("dap-go")
 
-            vim.keymap.set("n", "<leader>rt", dapgo.debug_test, { desc = "Debug go test under cursor" })
-
             dapgo.setup({})
+
+            Snacks.keymap.set("n", "<leader>rt", dapgo.debug_test, {
+                desc = "Debug go test under cursor",
+                ft = "go",
+                buffer = true,
+            })
         end,
     },
     {

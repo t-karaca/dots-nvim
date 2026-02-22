@@ -12,16 +12,17 @@ vim.keymap.set("n", "n", "nzzzv", { desc = "Next occurrence" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous occurrence" })
 
 vim.keymap.set("i", "<C-c>", "<Esc>")
--- vim.keymap.set("i", "jj", "<Esc>")
--- vim.keymap.set("i", "kj", "<Esc>")
+
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without yanking" })
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank into system clipboard" })
 vim.keymap.set("n", "<leader>fx", "<cmd>!chmod +x %<CR>", { desc = "Make current file executable" })
 
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
-vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Smart rename" })
+vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Smart rename" })
 vim.keymap.set("n", "gK", vim.diagnostic.open_float, { desc = "Show diagnostics for current line" })
+vim.keymap.set("n", "<leader>cs", "<cmd>LspClangdSwitchSourceHeader<CR>")
 
 vim.keymap.set("n", "K", function()
     vim.lsp.buf.hover({ border = "solid" })
