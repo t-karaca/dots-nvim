@@ -58,6 +58,15 @@ return {
                         return package.loaded["dap"] and require("dap").session() ~= nil
                     end,
                 },
+                {
+                    function()
+                        return "Running " .. require("usr.taskfile").current_task
+                    end,
+                    icon = { "", color = { fg = "green" } },
+                    cond = function()
+                        return require("usr.taskfile").is_task_running()
+                    end
+                },
                 "encoding",
                 "fileformat",
                 "filetype",
